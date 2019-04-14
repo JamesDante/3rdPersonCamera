@@ -8,3 +8,5 @@ Character controller from [SuperCharacterController](https://github.com/IronWarr
 Open the project in Unity, demo scenes are included in the \Assets\Scenes.
 
 # Screenshot
+
+![Screenshot](doc/GIF.gif)
