@@ -8,10 +8,10 @@ public class ThirdPersonCamera : MonoBehaviour
     public GameObject PlayerTarget;
     public ThirdPersonCameraCollisionHandler collision;
 
+    private Vector2 _mouseInput;
+    private Vector3 _lookDirection;
     private SuperCharacterController _controller;
-    private PlayerInputController _input;
     private Transform _target;
-    private PlayerMachine _machine;
     private Vector3 _targetPosition = Vector3.zero;
     private Vector3 _destination = Vector3.zero;
     private Vector3 _camraVelocity = Vector3.zero;
@@ -28,13 +28,11 @@ public class ThirdPersonCamera : MonoBehaviour
     void Awake()
     {
         collision = GetComponent<ThirdPersonCameraCollisionHandler>();
-        _input = PlayerTarget.GetComponent<PlayerInputController>();
-        _machine = PlayerTarget.GetComponent<PlayerMachine>();
         _controller = PlayerTarget.GetComponent<SuperCharacterController>();
         _target = PlayerTarget.transform;
         _targetPosition = _target.position;
         _targetPosition.y = _targetPosition.y + Height;
-
+        _lookDirection = _target.forward;
         _targetHeightAdjustmentDistance = _targetPosition.y;
         _preTargetHeight = _targetHeightAdjustmentDistance;
 
@@ -45,6 +43,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         _targetPosition = _target.position;
         _targetPosition.y = _targetPosition.y + Height;
+        _lookDirection = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * (_controller.deltaTime / Time.deltaTime), _controller.up) * _lookDirection;
 
         if (Mathf.Abs(_preTargetHeight - _targetPosition.y) > 3.3f ||
             _controller.currentGround.IsGrounded(false, 0) ||
@@ -57,13 +56,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
         _targetPosition.y = _preTargetHeight;
 
-        _yRotation += _input.Current.MouseInput.y;
-
         if (_yRotation > 90) _yRotation = 90;
         else if (_yRotation < -90) _yRotation = -90;
 
-        Vector3 left = Vector3.Cross(_machine.lookDirection, _controller.up);
-        transform.rotation = Quaternion.LookRotation(_machine.lookDirection, _controller.up);
+        Vector3 left = Vector3.Cross(_lookDirection, _controller.up);
+        transform.rotation = Quaternion.LookRotation(_lookDirection, _controller.up);
         transform.rotation = Quaternion.AngleAxis(_yRotation, left) * transform.rotation;
 
         _destination = _targetPosition;
