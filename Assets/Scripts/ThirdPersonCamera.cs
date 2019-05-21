@@ -6,7 +6,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public float Height = 2.0f;
     public float Distance = 5.0f;
     public GameObject PlayerTarget;
-    public ThirdPersonCameraCollisionHandler collision;
+    public ThirdPersonCameraCollisionHandler Collision;
 
     private Vector2 _mouseInput;
     private Vector3 _lookDirection;
@@ -27,7 +27,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Awake()
     {
-        collision = GetComponent<ThirdPersonCameraCollisionHandler>();
+        Collision = GetComponent<ThirdPersonCameraCollisionHandler>();
         _controller = PlayerTarget.GetComponent<SuperCharacterController>();
         _target = PlayerTarget.transform;
         _targetPosition = _target.position;
@@ -36,7 +36,7 @@ public class ThirdPersonCamera : MonoBehaviour
         _targetHeightAdjustmentDistance = _targetPosition.y;
         _preTargetHeight = _targetHeightAdjustmentDistance;
 
-        collision.Initialize(Camera.main);
+        Collision.Initialize(Camera.main);
     }
 
     void Update()
@@ -112,7 +112,7 @@ public class ThirdPersonCamera : MonoBehaviour
         _targetDistance = Distance;
         _dist = 15;
 
-        var dis = collision.HandleCollisionZoomDistance(_destination, _targetPosition, 0.18f, Distance);
+        var dis = Collision.HandleCollisionZoomDistance(_destination, _targetPosition, 0.18f, Distance);
         if (dis != Mathf.Infinity && dis < Distance)
         {
             _targetDistance = dis;

@@ -349,7 +349,7 @@ public class SuperCharacterController : MonoBehaviour
 
     /// <summary>
     /// Check if any of the CollisionSpheres are Colliding with any walkable objects in the world.
-    /// If they are, apply a proper pushback and retrieve the collision data
+    /// If they are, apply a proper pushback and retrieve the Collision data
     /// </summary>
     void RecursivePushback(int depth, int maxDepth)
     {
@@ -402,7 +402,7 @@ public class SuperCharacterController : MonoBehaviour
                         }
                         else
                         {
-                            // A previously resolved collision has had a side effect that moved us outside this collider
+                            // A previously resolved Collision has had a side effect that moved us outside this collider
                             continue;
                         }
                     }
@@ -427,7 +427,7 @@ public class SuperCharacterController : MonoBehaviour
                     if (superColType == null)
                         superColType = defaultCollisionType;
 
-                    // Our collision affected the collider; add it to the collision data
+                    // Our Collision affected the collider; add it to the Collision data
                     var collision = new SuperCollision()
                     {
                         collisionSphere = sphere,

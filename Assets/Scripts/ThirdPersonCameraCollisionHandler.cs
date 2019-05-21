@@ -27,7 +27,7 @@ public class ThirdPersonCameraCollisionHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Handle collision.
+    /// Handle Collision.
     /// </summary>
     /// <param name="cameraPosition"></param>
     /// <param name="_targetPosition"></param>
