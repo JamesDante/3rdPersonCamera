@@ -68,7 +68,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         transform.position = _destination;
 
-        SMoveToTarget(true);
+        SMoveToTarget();
 
         var fadeDistance = Vector3.Distance(_targetPosition, transform.position) * 0.5f;
         ToggleFadeTarget(fadeDistance);
@@ -107,7 +107,8 @@ public class ThirdPersonCamera : MonoBehaviour
         }
     }
 
-    private void SMoveToTarget(bool useCollision)
+    //Move camera to taget
+    private void SMoveToTarget()
     {
         _targetDistance = Distance;
         _dist = 15;

@@ -10,6 +10,7 @@ public class ThirdPersonCameraCollisionHandler : MonoBehaviour
     private float _rayDistance = Mathf.Infinity;
     private ThirdPersonCamera _cameraControl;
 
+    //Collision layers
     public LayerMask CollisionLayer;
 
     [HideInInspector]
